@@ -8,8 +8,11 @@ import {
     Text,
     FlatList,
     ToastAndroid,
-    RefreshControl
+    RefreshControl,
+    TouchableHighlight
 } from 'react-native';
+
+import {StackNavigator} from 'react-navigation';
 
 import HomeItemComponent from './HomeItemComponent'
 import HomeItemNoImageComponent from './HomeItemNoImageComponent'
@@ -17,11 +20,23 @@ import HomeItemNoImageComponent from './HomeItemNoImageComponent'
 import {BASE_URL, DATA_ALL_URL, GIRL_URL} from '../component/util/UrlUtils'
 import {commonStyles} from '../component/util/CommonStyles'
 
+
+/**
+ *
+ *  npm install react-native-tab-navigator --save
+ *
+ */
+
+
 const ITEM_HEIGHT = 120;
 // 当前请求的页数
 let pageNum = 1;
 let _key = 0;
 export default class HomeComponent extends Component {
+
+    static navigationOptions = {
+        headerTitle: '主页'
+    };
 
     constructor(props) {
         super(props);
@@ -101,14 +116,24 @@ export default class HomeComponent extends Component {
         console.log(_images == null);
         if (_images == null) {/*--- 如果没有图片的话 ---*/
             return <HomeItemNoImageComponent who={who}
-                                             desc={desc}/>
+                                             desc={desc}
+                                             itemPress={() => {
+                                                 this.props.navigation.navigate('HomeInfo', {
+                                                     webUrl: url
+                                                 });
+                                             }}/>
         }
 
         console.log(_images[0]);
         return <HomeItemComponent imageUrl={_images[0]}
                                   who={who}
-                                  desc={desc}/>;
-    };
+                                  desc={desc}
+                                  itemPress={() => {
+                                      this.props.navigation.navigate('HomeInfo', {
+                                          webUrl: url
+                                      });
+                                  }}/>
+    }
 
     /**
      * divider线

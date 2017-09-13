@@ -9,16 +9,23 @@ import {
     FlatList,
     RefreshControl,
     Image,
-    ToastAndroid
+    ToastAndroid,
+    TouchableHighlight
 } from 'react-native';
 
 import {BASE_URL, DATA_ALL_URL, GIRL_URL} from '../component/util/UrlUtils'
 import {commonStyles, ItemStyles} from '../component/util/CommonStyles'
 
+import {StackNavigator} from 'react-navigation';
+
 let pageNum = 1;
 let _key = 0;
 
 export default class GirlComponent extends Component {
+
+    static navigationOptions = {
+        headerTitle: '美女'
+    };
 
     constructor(props) {
         super(props);
@@ -74,18 +81,37 @@ export default class GirlComponent extends Component {
         this.fetchData();
     }
 
+    _onPress(_url) {
+        this.props.navigation.navigate('GirlInfo', {
+            imageUrl: _url
+        });
+    }
+
     _renderItem = (item) => {
         let positoin = item.index;
+        let url = item.item.value.url;
         if (positoin % 2 == 0) {
-            return <View style={ItemStyles.imageViewLeftStyle}>
+            return <TouchableHighlight
+                underlayColor='gainsboro'
+                style={ItemStyles.imageViewLeftStyle}
+                onPress={() => {
+                    this._onPress(url)
+                }}>
                 <Image style={ItemStyles.imageHorizontalStyle}
-                       source={{uri: item.item.value.url}}/>
-            </View>;
+                       source={{uri: url}}
+                />
+            </TouchableHighlight>;
         }
-        return <View style={ItemStyles.imageViewRightStyle}>
+        return <TouchableHighlight
+            underlayColor='gainsboro'
+            style={ItemStyles.imageViewRightStyle}
+            onPress={() => {
+                this._onPress(url)
+            }}>
             <Image style={ItemStyles.imageHorizontalStyle}
-                   source={{uri: item.item.value.url}}/>
-        </View>;
+                   source={{uri: url}}
+            />
+        </TouchableHighlight>;
     }
 
     render() {
