@@ -12,7 +12,7 @@ let iface = {
     propTypes: {
         radius: PropTypes.string,
         color: PropTypes.string,
-        ...View.propTypes// 包含默认的View的属性，如果没有这句会报‘has no propType for native prop’错误
+        ...View.propTypes // 包含默认的View的属性，如果没有这句会报‘has no propType for native prop’错误
     }
 };
 

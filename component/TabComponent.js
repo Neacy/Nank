@@ -22,7 +22,7 @@ const TabsNavigator = TabNavigator({
     Home: {
         screen: HomeComponent,
         navigationOptions: {
-            tabBarIcon: ({tintColor}) => (<Image source={require('Nank/drawables/tabbar_sp_unselected.png')} style={[
+            tabBarIcon: ({tintColor}) => (<Image source={require('../drawables/tabbar_sp_unselected.png')} style={[
                 {
                     tintColor: tintColor
                 },
@@ -35,7 +35,7 @@ const TabsNavigator = TabNavigator({
         screen: GirlComponent,
         navigationOptions: {
             tabBarLabel: '美女',
-            tabBarIcon: ({tintColor}) => (<Image source={require('Nank/drawables/tabbar_zb_unselected.png')} style={[
+            tabBarIcon: ({tintColor}) => (<Image source={require('../drawables/tabbar_zb_unselected.png')} style={[
                 {
                     tintColor: tintColor
                 },
@@ -47,7 +47,7 @@ const TabsNavigator = TabNavigator({
         screen: AboutComponent,
         navigationOptions: {
             tabBarLabel: '关于',
-            tabBarIcon: ({tintColor}) => (<Image source={require('Nank/drawables/tabbar_fx_unselected.png')} style={[
+            tabBarIcon: ({tintColor}) => (<Image source={require('../drawables/tabbar_fx_unselected.png')} style={[
                 {
                     tintColor: tintColor
                 },
