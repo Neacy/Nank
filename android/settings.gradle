@@ -1,3 +1,3 @@
 rootProject.name = 'Nank'
 
-include ':app'
+include ':app', ':BaseModule', ':rxlifecycle', ':rxlifecycle-android', ':rxlifecycle-components'

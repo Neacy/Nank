@@ -1,8 +1,8 @@
 package com.nank;
 
-import com.facebook.react.ReactActivity;
+import com.neacy.nank.BaseActivity;
 
-public class MainActivity extends ReactActivity {
+public class MainActivity extends BaseActivity {
 
     /**
      * Returns the name of the main component registered from JavaScript.
