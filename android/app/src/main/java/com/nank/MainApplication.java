@@ -8,6 +8,8 @@ import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
 import com.nank.react.view.NCustomPackage;
+import com.nank.retrofit.ApiService;
+import com.neacy.nank.retrofit.RetrofitManager;
 
 import java.util.Arrays;
 import java.util.List;
