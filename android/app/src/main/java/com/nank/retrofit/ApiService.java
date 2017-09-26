@@ -16,6 +16,6 @@ import retrofit2.http.Path;
  */
 public interface ApiService {
 
-    @GET("/all/10/{index}")
+    @GET("all/10/{index}")
     Observable<NetResponse<List<ApiResultModel>>> getAndroidList(@Path("index") String index);
 }

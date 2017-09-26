@@ -9,7 +9,8 @@ import {
     FlatList,
     ToastAndroid,
     RefreshControl,
-    TouchableHighlight
+    TouchableHighlight,
+    NativeModules
 } from 'react-native';
 
 import {StackNavigator} from 'react-navigation';
@@ -20,13 +21,8 @@ import HomeItemNoImageComponent from './HomeItemNoImageComponent'
 import {BASE_URL, DATA_ALL_URL, GIRL_URL} from '../component/util/UrlUtils'
 import {commonStyles} from '../component/util/CommonStyles'
 
-
-/**
- *
- *  npm install react-native-tab-navigator --save
- *
- */
-
+// 引入原生的module 主要是用于网络请求
+const HttpRequestManager = NativeModules.HttpRequestManager;
 
 const ITEM_HEIGHT = 120;
 // 当前请求的页数
@@ -50,7 +46,22 @@ export default class HomeComponent extends Component {
      * 组件渲染完毕的时候
      */
     componentDidMount() {
-        this.fetchData();
+        // this.fetchData();
+        HttpRequestManager.doRequestGankList(pageNum, (results) => {
+            let dataResult = [];
+            results.map((item) => {
+                dataResult.push({
+                    key: _key,
+                    value: item
+                })
+                _key++;
+            });
+
+            this.setState({
+                datas: pageNum == 1 ? dataResult : this.state.datas.concat(dataResult),
+                isRefresh: false
+            })
+        })
     }
 
     /**

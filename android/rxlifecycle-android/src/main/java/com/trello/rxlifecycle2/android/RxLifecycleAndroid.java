@@ -14,8 +14,6 @@
 
 package com.trello.rxlifecycle2.android;
 
-import android.support.annotation.CheckResult;
-import android.support.annotation.NonNull;
 import android.view.View;
 import com.trello.rxlifecycle2.LifecycleTransformer;
 import com.trello.rxlifecycle2.OutsideLifecycleException;
@@ -46,9 +44,7 @@ public class RxLifecycleAndroid {
      * @param lifecycle the lifecycle sequence of an Activity
      * @return a reusable {@link LifecycleTransformer} that unsubscribes the source during the Activity lifecycle
      */
-    @NonNull
-    @CheckResult
-    public static <T> LifecycleTransformer<T> bindActivity(@NonNull final Observable<ActivityEvent> lifecycle) {
+    public static <T> LifecycleTransformer<T> bindActivity(final Observable<ActivityEvent> lifecycle) {
         return bind(lifecycle, ACTIVITY_LIFECYCLE);
     }
 
@@ -67,9 +63,7 @@ public class RxLifecycleAndroid {
      * @param lifecycle the lifecycle sequence of a Fragment
      * @return a reusable {@link LifecycleTransformer} that unsubscribes the source during the Fragment lifecycle
      */
-    @NonNull
-    @CheckResult
-    public static <T> LifecycleTransformer<T> bindFragment(@NonNull final Observable<FragmentEvent> lifecycle) {
+    public static <T> LifecycleTransformer<T> bindFragment(final Observable<FragmentEvent> lifecycle) {
         return bind(lifecycle, FRAGMENT_LIFECYCLE);
     }
 
@@ -84,9 +78,7 @@ public class RxLifecycleAndroid {
      * @param view the view to bind the source sequence to
      * @return a reusable {@link LifecycleTransformer} that unsubscribes the source during the View lifecycle
      */
-    @NonNull
-    @CheckResult
-    public static <T> LifecycleTransformer<T> bindView(@NonNull final View view) {
+    public static <T> LifecycleTransformer<T> bindView(final View view) {
         checkNotNull(view, "view == null");
 
         return bind(Observable.create(new ViewDetachesOnSubscribe(view)));

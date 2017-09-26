@@ -1,7 +1,7 @@
 package com.neacy.nank;
 
 public class LogUtil {
-	public static boolean isDebug = BuildConfig.DEBUG;
+	public static boolean isDebug = true;
 
 	public static void v(String tag, String msg) {
 		if (isDebug)
