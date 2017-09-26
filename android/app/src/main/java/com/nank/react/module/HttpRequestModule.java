@@ -2,7 +2,6 @@ package com.nank.react.module;
 
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.Callback;
-import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
@@ -27,6 +26,8 @@ public class HttpRequestModule extends ReactContextBaseJavaModule {
 
     public HttpRequestModule(ReactApplicationContext reactContext) {
         super(reactContext);
+
+        LogUtil.w(TAG, "=== HttpRequestModule == " + (reactContext.toString()));
     }
 
     @Override
@@ -46,7 +47,6 @@ public class HttpRequestModule extends ReactContextBaseJavaModule {
                         LogUtil.w(TAG, "=== result === " + results.size());
                         if (results.isEmpty()) {
                             callback.invoke(new Exception("empty error"));
-//                            promise.reject(new Exception("empty error"));
                             return;
                         }
 
@@ -64,7 +64,6 @@ public class HttpRequestModule extends ReactContextBaseJavaModule {
                             wm.putString("who", am.getWho());
                             wArray.pushMap(wm);
                         }
-//                        promise.resolve(wArray);
                         callback.invoke(wArray);
                         LogUtil.w(TAG, "--- Http Request Success ---");
                     }
