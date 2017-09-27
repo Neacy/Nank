@@ -90,15 +90,15 @@ def enableSeparateBuildPerCPUArchitecture = false
 def enableProguardInReleaseBuilds = false
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.1"
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
         applicationId "com.nank"
-        minSdkVersion 19
-        targetSdkVersion 23
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode rootProject.ext.versionCode
+        versionName rootProject.ext.versionName
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
@@ -149,9 +149,7 @@ android {
 dependencies {
     compile fileTree(dir: "libs", include: ["*.jar"])
     compile project(":BaseModule")
-
-
-    compile 'com.android.support:multidex:1.0.1'
+    compile rootProject.ext.multidex
 }
 
 // Run this once to be able to run the application with BUCK
