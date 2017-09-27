@@ -7,10 +7,15 @@ import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.WritableArray;
 import com.facebook.react.bridge.WritableMap;
+import com.nank.MainActivity;
 import com.nank.model.ApiResultModel;
 import com.nank.retrofit.RetrofitHttpRequest;
+import com.neacy.nank.BaseActivity;
 import com.neacy.nank.LogUtil;
 import com.neacy.nank.retrofit.RetrofitManager;
+import com.trello.rxlifecycle2.android.ActivityEvent;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
@@ -26,8 +31,6 @@ public class HttpRequestModule extends ReactContextBaseJavaModule {
 
     public HttpRequestModule(ReactApplicationContext reactContext) {
         super(reactContext);
-
-        LogUtil.w(TAG, "=== HttpRequestModule == " + (reactContext.toString()));
     }
 
     @Override
@@ -37,9 +40,11 @@ public class HttpRequestModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void doRequestGankList(int index, final Callback callback) {
+        BaseActivity mActivity = (BaseActivity) getCurrentActivity();
         // 采用Retofit发起一次接口请求，并将获取到的数据写入到RN界面
         RetrofitHttpRequest.getInstance().getApiService().getAndroidList(String.valueOf(index))
                 .compose(RetrofitManager.HTTPREQUEST_TRANSFORMER)
+                .compose(mActivity.bindUntilEvent(ActivityEvent.DESTROY))
                 .subscribe(new Consumer<Object>() {
                     @Override
                     public void accept(Object o) throws Exception {
